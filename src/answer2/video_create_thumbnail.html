@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>video thumbnail clipping</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</head>
+<body>
+<input type='file' id='movie_file' name='movie_file'>
+<video id='src_video' controls></video>
+<div id='imgArea'></div>
+<script>
+$(function(){
+	var src_video = document.querySelector('#src_video');
+	var canvas = document.createElement('canvas');
+	src_video.onloadedmetadata = function(){
+		canvas.width = this.videoWidth;
+		canvas.height = this.videoHeight;
+	};
+	src_video.onloadeddata = function(){
+  		this.currentTime = 0;
+		this.setAttribute('Created_Thumbnail', false);
+    };
+	src_video.onseeked = function(){
+		if (this.getAttribute('Created_Thumbnail') == 'true') {
+			return;
+		}
+		capture();
+		this.currentTime += 5;
+		if (this.currentTime > 15) {
+			this.currentTime = 0;
+			this.setAttribute('Created_Thumbnail', true);
+			return;
+		}
+	};
+	var movie_file = document.querySelector('#movie_file');
+	movie_file.addEventListener('change', function(){
+		src_video.src = URL.createObjectURL(this.files[0]);
+  	});
+	function capture(){
+	  	var context = canvas.getContext('2d');
+	  	context.drawImage(src_video, 0, 0);
+	  	var img = new Image();
+	  	img.src = canvas.toDataURL('image/jpeg' , 0.8);
+		var imgArea = document.querySelector('#imgArea');
+	  	imgArea.appendChild(img);
+  	}
+});
+</script>
+</body>
+</html>
