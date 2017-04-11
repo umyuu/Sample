@@ -1,0 +1,13 @@
+{
+	"author": "うみゅ",
+	"description": "alarm",
+	"permissions": ["background", "storage", "notifications", "alarms"],
+	"manifest_version": 2,
+  	"background": {
+    	"scripts": ["js/alarm.js"],
+    	"persistent": false
+    },
+	"name": "alarm",
+	"homepage_url": "http://example.com/",
+	"version": "1.0.0"
+}
