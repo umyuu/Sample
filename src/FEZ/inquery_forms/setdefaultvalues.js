@@ -3,7 +3,7 @@ function setValue(key, value) {
 	if (element == null) return;
 	element.value = value;
 };
-$(function() {
+$(() => {
 	var now = new Date();
 	//---------------------------------------------------------------
 	// 【不具合のご報告】 フォーム
