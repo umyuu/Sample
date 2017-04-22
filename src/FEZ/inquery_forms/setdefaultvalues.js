@@ -29,6 +29,10 @@ class HtmlUtils {
 }
 
 class Widgets {
+    constructor() {
+        this.createCountries('input[name="fez_reporter_region"]'); //通報者の国家名
+        this.createCountries('input[name="fez_report_region"]'); //違反者の国家名
+    }
     createCountries(key) {
         // 国家名のセレクトボックスを作成
         // key:Selector セレクトボックスを追加するための位置ヒントとして利用
@@ -60,8 +64,6 @@ class Widgets {
 	   HtmlUtils.setValue('select[name="lova_report_datetime2"]', now.getMonth() + 1);
 	   HtmlUtils.setValue('select[name="lova_report_datetime3"]', now.getDate());
 	   HtmlUtils.setValue('select[name="lova_report_datetime4"]', now.getHours());
-	   this.createCountries('input[name="fez_reporter_region"]'); //通報者の国家名
-	   this.createCountries('input[name="fez_report_region"]'); //違反者の国家名
 	   //---------------------------------------------------------------
 	   // 【不具合のご報告】、 【迷惑行為のご報告】フォームの両方にある項目
 	   //---------------------------------------------------------------
