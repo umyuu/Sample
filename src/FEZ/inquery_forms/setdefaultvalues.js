@@ -3,7 +3,7 @@ class HtmlUtils {
         // セレクタ
         const element = document.querySelector(key);
         if (element == null) return null;
-        // 問い合わせフォームの確認画面では非表示項目になるため。
+        // 問い合わせフォームの確認画面ではhiddenになるため。
         if (element.getAttribute('type') == 'hidden') return null;
         return element;
     }
