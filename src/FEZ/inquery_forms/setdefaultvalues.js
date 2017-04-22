@@ -1,16 +1,16 @@
 const COUNTRIES = [
-	{ text:'', value:'' },
+    { text:'', value:'' },
     { text:'ネツァワル', value:'ネツァワル' },
     { text:'エルソード', value:'エルソード' },
-	{ text:'ホルデイン', value:'ホルデイン' },
-	{ text:'ゲブランド', value:'ゲブランド' },
-	{ text:'カセドリア', value:'カセドリア' },
+    { text:'ホルデイン', value:'ホルデイン' },
+    { text:'ゲブランド', value:'ゲブランド' },
+    { text:'カセドリア', value:'カセドリア' },
 ];
 // セレクトボックスを作成
 function createSelectBox(element, options){
     element.length = options.length;
     for (var i = 0; i < options.length; i++){
-		var item = options[i];
+        const item = options[i];
         element.options[i].text = item.text;
         element.options[i].value = item.value;
     }
