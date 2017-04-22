@@ -15,17 +15,25 @@ function createSelectBox(element, options){
         element.options[i].value = item.value;
     }
 };
+function QS(key) {
+	const element = document.querySelector(key);
+	if (element == null) return null;
+	// 問い合わせフォームの確認画面では非表示項目になるため。
+	if (element.getAttribute('type') == 'hidden') return null;
+	return element;
+}
 // 値を設定
 function setValue(key, value) {
-	const element = document.querySelector(key);
+	const element = QS(key);
 	if (element == null) return;
 	element.value = value;
 };
 // 国家名のセレクトボックスを作成
 // セレクトボックスを選択時に、input項目に反映
 function createCountries(key) {
-	const element = document.querySelector(key);
+	const element = QS(key);
 	if (element == null) return;
+	
 	const select = document.createElement('select');
 	createSelectBox(select, COUNTRIES);
 	// セレクトボックス => input項目への反映
