@@ -1,10 +1,10 @@
 const COUNTRIES = [
 	{ text:'', value:'' },
     { text:'ネツァワル', value:'ネツァワル' },
-    { text:'カセドリア', value:'カセドリア' },
     { text:'エルソード', value:'エルソード' },
 	{ text:'ホルデイン', value:'ホルデイン' },
 	{ text:'ゲブランド', value:'ゲブランド' },
+	{ text:'カセドリア', value:'カセドリア' },
 ];
 // セレクトボックスを作成
 function createSelectBox(element, options){
