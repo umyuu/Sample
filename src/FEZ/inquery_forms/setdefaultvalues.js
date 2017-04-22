@@ -18,7 +18,7 @@ class HtmlUtils {
         }
         return element;
     }
-    static setValue(key, value) {
+    static val(key, value) {
         // 値を設定
         // key:Selector
         // value:value
@@ -52,22 +52,22 @@ class Widgets {
 	   //---------------------------------------------------------------
 	   // 【不具合のご報告】 フォーム
 	   //---------------------------------------------------------------
-	   HtmlUtils.setValue('select[name="trouble_date1"]', now.getFullYear());
-	   HtmlUtils.setValue('select[name="trouble_date2"]', now.getMonth() + 1);
-	   HtmlUtils.setValue('select[name="trouble_date3"]', now.getDate());
-	   HtmlUtils.setValue('select[name="trouble_date4"]', now.getHours());
-	   HtmlUtils.setValue('select[name="webbrowser_name"]', 'Google Chrome');
+	   HtmlUtils.val('select[name="trouble_date1"]', now.getFullYear());
+	   HtmlUtils.val('select[name="trouble_date2"]', now.getMonth() + 1);
+	   HtmlUtils.val('select[name="trouble_date3"]', now.getDate());
+	   HtmlUtils.val('select[name="trouble_date4"]', now.getHours());
+	   HtmlUtils.val('select[name="webbrowser_name"]', 'Google Chrome');
 	   //---------------------------------------------------------------
 	   // 【迷惑行為のご報告】 フォーム
 	   //---------------------------------------------------------------
-	   HtmlUtils.setValue('select[name="lova_report_datetime1"]', now.getFullYear());
-	   HtmlUtils.setValue('select[name="lova_report_datetime2"]', now.getMonth() + 1);
-	   HtmlUtils.setValue('select[name="lova_report_datetime3"]', now.getDate());
-	   HtmlUtils.setValue('select[name="lova_report_datetime4"]', now.getHours());
+	   HtmlUtils.val('select[name="lova_report_datetime1"]', now.getFullYear());
+	   HtmlUtils.val('select[name="lova_report_datetime2"]', now.getMonth() + 1);
+	   HtmlUtils.val('select[name="lova_report_datetime3"]', now.getDate());
+	   HtmlUtils.val('select[name="lova_report_datetime4"]', now.getHours());
 	   //---------------------------------------------------------------
 	   // 【不具合のご報告】、 【迷惑行為のご報告】フォームの両方にある項目
 	   //---------------------------------------------------------------
-	   HtmlUtils.setValue('select[name="fez_world"]', 'ワールド統合後');
+	   HtmlUtils.val('select[name="fez_world"]', 'ワールド統合後');
     }
 }
 const COUNTRIES = [
