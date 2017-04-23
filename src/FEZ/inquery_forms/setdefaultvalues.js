@@ -44,8 +44,7 @@ class Widgets {
         const select = HtmlUtils.createSelectBox(options);
         // セレクトボックス => input項目への反映
         select.onchange = (event) => {
-           const target = event.target;
-           element.value = target.options[target.selectedIndex].value;
+            element.value = event.target.value;
         }
         element.parentNode.insertBefore(select, element.nextSibling);
     }
