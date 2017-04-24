@@ -11,17 +11,17 @@
 <div id='imgArea'></div>
 <script>
 $(function(){
-	var src_video = document.querySelector('#src_video');
-	var canvas = document.createElement('canvas');
-	src_video.addEventListener('loadedmetadata', function(event){
+	const src_video = document.querySelector('#src_video');
+	const canvas = document.createElement('canvas');
+	src_video.addEventListener('loadedmetadata', function(){
 		canvas.width = this.videoWidth;
 		canvas.height = this.videoHeight;
 	});
-	src_video.addEventListener('loadeddata', function(event){
+	src_video.addEventListener('loadeddata', function(){
   		this.currentTime = 0;
 		this.setAttribute('Created_Thumbnail', false);
     });
-	src_video.addEventListener('seeked', function(event){
+	src_video.addEventListener('seeked', function(){
 		if (this.getAttribute('Created_Thumbnail') == 'true') {
 			return;
 		}
@@ -33,19 +33,19 @@ $(function(){
 			return;
 		}
 	});
-	var movie_file = document.querySelector('#movie_file');
+	const movie_file = document.querySelector('#movie_file');
 	movie_file.addEventListener('change', function(){
 		src_video.src = URL.createObjectURL(this.files[0]);
   	});
 	function capture(src){
-	  	var context = canvas.getContext('2d');
+	  	const context = canvas.getContext('2d');
 	  	context.drawImage(src, 0, 0);
-	  	var img = new Image();
-	  	img.src = canvas.toDataURL('image/jpeg');
-		img.onload = function() {
+	  	const img = document.createElement('img');
+	  	img.addEventListener('load', function(){
 			var imgArea = document.querySelector('#imgArea');
 	  		imgArea.appendChild(img);
-		};
+        });
+        img.src = canvas.toDataURL('image/jpeg');
   	}
 });
 </script>
