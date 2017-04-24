@@ -19,7 +19,7 @@ function draw(){
     /* Imageオブジェクトを生成 */
     var img = document.createElement('img');
 	// Image#onload => Image#src ordering
-    img.onload = () => {
+    img.addEventListener('load', (event) => {
 		var ctx = canvas.getContext('2d');
    		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     	ctx.fillStyle = "blue";
@@ -29,7 +29,7 @@ function draw(){
     	ctx.font = "30px 'ＭＳ ゴシック'";
     	ctx.fillText("見出しテキスト", canvas.width/2, canvas.height);
     	fld1.value = canvas.toDataURL();
-	};
+	});
 	// disable image cache
 	img.src = "photo.png?" + new Date().getTime();
 };
