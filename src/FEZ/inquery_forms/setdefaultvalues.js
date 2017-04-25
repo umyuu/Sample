@@ -1,15 +1,15 @@
 class HtmlUtils {
     static QS(key) {
         // セレクタ
-        const element = document.querySelector(key);
-        if (element == null) return null;
+        const node = document.querySelector(key);
+        if (node == null) return null;
         // 問い合わせフォームの確認画面ではhiddenになるため。
-        if (element.getAttribute('type') == 'hidden') return null;
-        return element;
+        if (node.getAttribute('type') == 'hidden') return null;
+        return node;
     }
-    static createSelectBox(options) {
+    static createSelectBox(node, options) {
         // セレクトボックスを作成
-        const element = document.createElement('select');
+        const element = node.ownerDocument.createElement('select');
         element.length = options.length;
         for (var i = 0; i < options.length; i++){
             const item = options[i];
@@ -22,9 +22,9 @@ class HtmlUtils {
         // 値を設定
         // key:Selector
         // value:value
-        const element = HtmlUtils.QS(key);
-        if (element == null) return;
-        element.value = value;
+        const node = HtmlUtils.QS(key);
+        if (node == null) return;
+        node.value = value;
     }
 }
 
@@ -37,16 +37,17 @@ class Widgets {
     createSelectBox(key, options) {
         // セレクトボックスを作成
         // key:Selector セレクトボックスを追加するための位置ヒントとして利用
+        // option:Array optionタグ用
         // セレクトボックスを選択時に、input項目に反映
-        const element = HtmlUtils.QS(key);
-        if (element == null) return;
+        const node = HtmlUtils.QS(key);
+        if (node == null) return;
         
-        const select = HtmlUtils.createSelectBox(options);
+        const select = HtmlUtils.createSelectBox(node, options);
         // セレクトボックス => input項目への反映
         select.addEventListener('change', (event) => {
-            element.value = event.target.value;
-        });
-        element.parentNode.insertBefore(select, element.nextSibling);
+            node.value = event.currentTarget.value;
+        }, false);
+        node.parentNode.insertBefore(select, node.nextSibling);
     }
     setdefaultvalues() {
         // 問い合わせフォーム表示の初期設定値
