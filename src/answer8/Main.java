@@ -20,7 +20,7 @@ public class Main {
                 System.out.println("コンピュータに" + GamePlay.MAX_LOSE_COUNT + "回負けたら終了です。");
                 
                 game.determineWinner(player.choice(), computer.choice());
-                game.displayResults();
+                System.out.println(game.toString());
             } catch (InputMismatchException ex) {
                 System.out.println("0.1.2.以外は入力しないでください");
             }
@@ -116,15 +116,17 @@ class GamePlay {
 
         Judge judge = Hand.judge(player, computer);
         counter.put(judge, counter.getOrDefault(judge, 0) + 1);
-
+        
         System.out.println(judge.getName());
     }
 
-    void displayResults() {
-        System.out.print("勝った回数:" + counter.getOrDefault(Judge.Win, 0));
-        System.out.print("/負けた回数:" + counter.getOrDefault(Judge.Lose, 0));
-        System.out.print("/引きわけの回数:" + counter.getOrDefault(Judge.Draw, 0));
-        System.out.println();
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("勝った回数:" ).append(counter.getOrDefault(Judge.Win, 0));
+        sb.append("/負けた回数:" ).append(counter.getOrDefault(Judge.Lose, 0));
+        sb.append("/引きわけの回数:" ).append(counter.getOrDefault(Judge.Draw, 0));
+        return sb.toString();
     }
 
     boolean isGameOver() {
