@@ -18,7 +18,9 @@ public class Main {
             try {
                 System.out.println("ジャンケンゲームです！あなたの手を入力してください グー：0 チョキ：1 パー：2");
                 System.out.println("コンピュータに" + GamePlay.MAX_LOSE_COUNT + "回負けたら終了です。");
+                
                 game.determineWinner(player.choice(), computer.choice());
+                game.displayResults();
             } catch (InputMismatchException ex) {
                 System.out.println("0.1.2.以外は入力しないでください");
             }
@@ -111,11 +113,14 @@ class GamePlay {
     <T extends Hand> void determineWinner(T player, T computer) {
         System.out.println("あなたの手は" + player);
         System.out.println("コンピュータは" + computer);
-        
+
         Judge judge = Hand.judge(player, computer);
         counter.put(judge, counter.getOrDefault(judge, 0) + 1);
-        
+
         System.out.println(judge.getName());
+    }
+
+    void displayResults() {
         System.out.print("勝った回数:" + counter.getOrDefault(Judge.Win, 0));
         System.out.print("/負けた回数:" + counter.getOrDefault(Judge.Lose, 0));
         System.out.print("/引きわけの回数:" + counter.getOrDefault(Judge.Draw, 0));
