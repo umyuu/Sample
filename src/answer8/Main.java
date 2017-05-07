@@ -1,7 +1,6 @@
-
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -9,24 +8,24 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         GamePlay game = new GamePlay();
         Actor player = new Player();
         Actor computer = new Computer();
         while (!game.isGameOver()) {
             try {
                 System.out.println("ジャンケンゲームです！あなたの手を入力してください グー：0 チョキ：1 パー：2");
-                game.DisplayGameOverCondition();
+                System.out.println("コンピュータに" + GamePlay.MAX_LOSE_COUNT + "回負けたら終了です。");
                 game.determineWinner(player.choice(), computer.choice());
-            } catch (Exception e) {
+            } catch (InputMismatchException ex) {
                 System.out.println("0.1.2.以外は入力しないでください");
             }
         }
-        System.out.println("3回負けたので終了です");
+        System.out.println(GamePlay.MAX_LOSE_COUNT + "回負けたので終了です");
     }
 }
 
-enum Winlose {
+enum Judge {
     Win,
     Lose,
     Draw,
@@ -41,29 +40,29 @@ enum Hand {
         return Hand.values()[i];
     }
 
-    static Winlose winlose(Hand handA, Hand handB) {
+    static Judge judge(Hand handA, Hand handB) {
         if (handA.equals(handB)) {
             // Draw
-            return Winlose.Draw;
+            return Judge.Draw;
         }
         switch (handA) {
             case グー:
                 if (handB == Hand.チョキ) {
-                    return Winlose.Win;
+                    return Judge.Win;
                 }
                 break;
             case チョキ:
                 if (handB == Hand.パー) {
-                    return Winlose.Win;
+                    return Judge.Win;
                 }
                 break;
             case パー:
                 if (handB == Hand.グー) {
-                    return Winlose.Win;
+                    return Judge.Win;
                 }
                 break;
         }
-        return Winlose.Lose;
+        return Judge.Lose;
     }
 }
 
@@ -74,10 +73,11 @@ interface Actor {
 
 class Player implements Actor {
 
+    private final Scanner scanner = new Scanner(System.in);
+
     @Override
     public Hand choice() {
-        Scanner scanner = new Scanner(System.in);
-        int hand = scanner.nextInt();
+        int hand = scanner.nextInt(3);
         scanner.reset();
         return Hand.valueOf(hand);
     }
@@ -96,7 +96,7 @@ class Computer implements Actor {
 
 class GamePlay {
 
-    private final int MAX_LOSE_COUNT = 3;
+    public static final int MAX_LOSE_COUNT = 3;
     private int winCount = 0;
     private int loseCount = 0;
     private int drawCount = 0;
@@ -104,7 +104,7 @@ class GamePlay {
     void determineWinner(Hand playerhand, Hand computerhand) {
         System.out.println("あなたの手は" + playerhand);
         System.out.println("コンピュータは" + computerhand);
-        switch (Hand.winlose(playerhand, computerhand)) {
+        switch (Hand.judge(playerhand, computerhand)) {
             case Win:
                 System.out.println("勝ち");
                 winCount++;
@@ -123,9 +123,5 @@ class GamePlay {
 
     boolean isGameOver() {
         return loseCount >= MAX_LOSE_COUNT;
-    }
-
-    void DisplayGameOverCondition() {
-        System.out.println("コンピュータに" + MAX_LOSE_COUNT + "回負けたら終了です。");
     }
 }
