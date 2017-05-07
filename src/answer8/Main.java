@@ -1,3 +1,4 @@
+
 import java.util.Random;
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -42,22 +43,21 @@ enum Hand {
 
     static Judge judge(Hand handA, Hand handB) {
         if (handA.equals(handB)) {
-            // Draw
             return Judge.Draw;
         }
         switch (handA) {
             case グー:
-                if (handB == Hand.チョキ) {
+                if (handB.equals(Hand.チョキ)) {
                     return Judge.Win;
                 }
                 break;
             case チョキ:
-                if (handB == Hand.パー) {
+                if (handB.equals(Hand.パー)) {
                     return Judge.Win;
                 }
                 break;
             case パー:
-                if (handB == Hand.グー) {
+                if (handB.equals(Hand.グー)) {
                     return Judge.Win;
                 }
                 break;
@@ -66,17 +66,16 @@ enum Hand {
     }
 }
 
-interface Actor {
+interface Actor<T extends Hand> {
 
-    Hand choice();
+    T choice();
 }
 
 class Player implements Actor {
 
-    private final Scanner scanner = new Scanner(System.in);
-
     @Override
     public Hand choice() {
+        Scanner scanner = new Scanner(System.in);
         int hand = scanner.nextInt(3);
         scanner.reset();
         return Hand.valueOf(hand);
@@ -101,10 +100,10 @@ class GamePlay {
     private int loseCount = 0;
     private int drawCount = 0;
 
-    void determineWinner(Hand playerhand, Hand computerhand) {
-        System.out.println("あなたの手は" + playerhand);
-        System.out.println("コンピュータは" + computerhand);
-        switch (Hand.judge(playerhand, computerhand)) {
+    <T extends Hand> void determineWinner(T player, T computer) {
+        System.out.println("あなたの手は" + player);
+        System.out.println("コンピュータは" + computer);
+        switch (Hand.judge(player, computer)) {
             case Win:
                 System.out.println("勝ち");
                 winCount++;
