@@ -1,4 +1,5 @@
 
+import java.util.EnumMap;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -27,9 +28,18 @@ public class Main {
 }
 
 enum Judge {
-    Win,
-    Lose,
-    Draw,
+    Win("勝ち"),
+    Lose("負け"),
+    Draw("引き分け");
+    private final String name;
+
+    Judge(String name) {
+        this.name = name;
+    }
+
+    String getName() {
+        return this.name;
+    }
 }
 
 enum Hand {
@@ -96,31 +106,22 @@ class Computer implements Actor {
 class GamePlay {
 
     public static final int MAX_LOSE_COUNT = 3;
-    private int winCount = 0;
-    private int loseCount = 0;
-    private int drawCount = 0;
+    private final EnumMap<Judge, Integer> counter = new EnumMap<>(Judge.class);
 
     <T extends Hand> void determineWinner(T player, T computer) {
         System.out.println("あなたの手は" + player);
         System.out.println("コンピュータは" + computer);
-        switch (Hand.judge(player, computer)) {
-            case Win:
-                System.out.println("勝ち");
-                winCount++;
-                break;
-            case Lose:
-                System.out.println("負け");
-                loseCount++;
-                break;
-            case Draw:
-                System.out.println("引き分け");
-                drawCount++;
-                break;
-        }
-        System.out.println("勝った回数:" + winCount + "/負けた回数:" + loseCount + "/引きわけの回数:" + drawCount + "");
+        Judge judge = Hand.judge(player, computer);
+        Integer c = counter.getOrDefault(judge, 0);
+        counter.put(judge, c + 1);
+        System.out.println(judge.getName());
+        System.out.print("勝った回数:" + counter.getOrDefault(Judge.Win, 0));
+        System.out.print("/負けた回数:" + counter.getOrDefault(Judge.Lose, 0));
+        System.out.print("/引きわけの回数:" + counter.getOrDefault(Judge.Draw, 0));
+        System.out.println();
     }
 
     boolean isGameOver() {
-        return loseCount >= MAX_LOSE_COUNT;
+        return counter.getOrDefault(Judge.Lose, 0) >= MAX_LOSE_COUNT;
     }
 }
