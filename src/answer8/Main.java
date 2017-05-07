@@ -111,9 +111,10 @@ class GamePlay {
     <T extends Hand> void determineWinner(T player, T computer) {
         System.out.println("あなたの手は" + player);
         System.out.println("コンピュータは" + computer);
+        
         Judge judge = Hand.judge(player, computer);
-        Integer c = counter.getOrDefault(judge, 0);
-        counter.put(judge, c + 1);
+        counter.put(judge, counter.getOrDefault(judge, 0) + 1);
+        
         System.out.println(judge.getName());
         System.out.print("勝った回数:" + counter.getOrDefault(Judge.Win, 0));
         System.out.print("/負けた回数:" + counter.getOrDefault(Judge.Lose, 0));
