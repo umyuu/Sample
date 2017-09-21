@@ -11,7 +11,7 @@ class HtmlUtils {
         // セレクトボックスを作成
         const element = node.ownerDocument.createElement('select');
         for (let item of options) {
-            const option = document.createElement('option');
+            const option = node.ownerDocument.createElement('option');
             option.text = item.text || item.value;
             option.value = item.value || item.text;
             element.appendChild(option);
