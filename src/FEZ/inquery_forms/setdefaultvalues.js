@@ -10,11 +10,11 @@ class HtmlUtils {
     static createSelectBox(node, options) {
         // セレクトボックスを作成
         const element = node.ownerDocument.createElement('select');
-        element.length = options.length;
-        for (var i = 0; i < options.length; i++){
-            const item = options[i];
-            element.options[i].text = item.text || item.value;
-            element.options[i].value = item.value || item.text;
+        for (let item of options) {
+            const option = document.createElement('option');
+            option.text = item.text || item.value;
+            option.value = item.value || item.text;
+            element.appendChild(option);
         }
         return element;
     }
