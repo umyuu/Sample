@@ -23,15 +23,15 @@ public class UnzipT1 {
 		System.out.println("対象フォルダを入力してください。");
 		try (Scanner in = new Scanner(System.in)) {
 			String strIn = in.nextLine();
-			
+
 			UnzipT1 unzip = new UnzipT1();
-	        Files.walkFileTree(Paths.get(strIn), new SimpleFileVisitor<Path>() {
-	            @Override
-	            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-	            	unzip.extractAll(file.toFile());
-	                return FileVisitResult.CONTINUE;
-	            }
-	        });
+			Files.walkFileTree(Paths.get(strIn), new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+					unzip.extractAll(file.toFile());
+					return FileVisitResult.CONTINUE;
+				}
+			});
 		}
 	}
 
@@ -50,7 +50,7 @@ public class UnzipT1 {
 			zipFile.extractAll(destination);
 
 		} catch (ZipException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 		return true;
