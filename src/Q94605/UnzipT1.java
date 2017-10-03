@@ -29,7 +29,7 @@ public class UnzipT1 {
 				@Override
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 					unzip.extractAll(file.toFile());
-					return FileVisitResult.CONTINUE;
+					return super.visitFile(file, attrs);
 				}
 			});
 		}
