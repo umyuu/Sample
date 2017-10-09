@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+function test(){
+$.ajaxSetup({
+    cache: false,
+});
+$.ajax({
+  type: 'GET'
+}).done(function(data, status, xhr) {
+    var serverDate = new Date(xhr.getResponseHeader('Date'));
+    var anyDate = new Date("2018/01/01 00:00:01");
+    var dayTime = Math.ceil((anyDate - serverDate)/(1000*60*60*24));
+
+    $('#count').text(dayTime);
+});
+};
+</script>
+</head>
+<body onload="test();">
+<div id="count"></div>
+</body>
+</html>
