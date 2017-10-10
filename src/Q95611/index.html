@@ -5,23 +5,30 @@
 <title></title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-function test(){
 $.ajaxSetup({
     cache: false,
 });
-$.ajax({
-  type: 'GET'
-}).done(function(data, status, xhr) {
-    var serverDate = new Date(xhr.getResponseHeader('Date'));
-    var anyDate = new Date("2018/01/01 00:00:01");
-    var dayTime = Math.ceil((anyDate - serverDate)/(1000*60*60*24));
-
-    $('#count').text(dayTime);
-});
+function test(){
+    $.ajax({
+        type: 'GET'
+    }).done(function(data, status, xhr) {
+        var serverDate = new Date(xhr.getResponseHeader('Date'));
+        var anyDate = new Date("2018/01/01 00:00:01");
+        // ミリ秒から日数へ単位変換
+        var dayTime = Math.ceil((anyDate - serverDate)/(1000*60*60*24));
+        $('#status_code').text('status_code:' + status);
+        $('#date_server').text('server:' + xhr.getResponseHeader('Date'));
+        $('#date_any').text('any:' + anyDate);
+        $('#count').text(dayTime);
+    });
 };
+window.addEventListener("DOMContentLoaded", test, false);
 </script>
 </head>
-<body onload="test();">
+<body>
+<div id="status_code"></div>
+<div id="date_server"></div>
+<div id="date_any"></div>
 <div id="count"></div>
 </body>
 </html>
