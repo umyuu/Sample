@@ -22,7 +22,19 @@ function test(){
         $('#count').text(dayTime);
     });
 };
+function unittest(){
+    $.ajax({
+        type: 'GET'
+    }).done(function(data, status, xhr) {
+	if (xhr.getResponseHeader('Date') === null){
+		$('#result').text('NG');
+	} else {
+		$('#result').text('OK');
+	}
+    });
+};
 window.addEventListener("DOMContentLoaded", test, false);
+window.addEventListener("DOMContentLoaded", unittest, false);
 </script>
 </head>
 <body>
@@ -30,5 +42,6 @@ window.addEventListener("DOMContentLoaded", test, false);
 <div id="date_server"></div>
 <div id="date_any"></div>
 <div id="count"></div>
+<div id="result"></div>
 </body>
 </html>
