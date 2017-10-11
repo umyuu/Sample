@@ -5,8 +5,10 @@
 <title></title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+// ajaxのキャッシュを無効化
 $.ajaxSetup({
     cache: false,
+    timeout : 10000,
 });
 function test(){
     $.ajax({
@@ -20,17 +22,19 @@ function test(){
         $('#date_server').text('server:' + xhr.getResponseHeader('Date'));
         $('#date_any').text('any:' + anyDate);
         $('#count').text(dayTime);
+    }).fail(function(xhr, status, errorThrown) {
+        $('#result').text('timeout');
     });
 };
 function unittest(){
     $.ajax({
         type: 'GET'
     }).done(function(data, status, xhr) {
-	if (xhr.getResponseHeader('Date') === null){
-		$('#result').text('NG');
-	} else {
-		$('#result').text('OK');
-	}
+	   if (xhr.getResponseHeader('Date') === null){
+           $('#result').text('NG');
+	   } else {
+           $('#result').text('OK');
+       }
     });
 };
 window.addEventListener("DOMContentLoaded", test, false);
