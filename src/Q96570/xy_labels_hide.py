@@ -11,7 +11,7 @@ def image_save(file_name, data):
     :param data:データ　x, y
     :return:
     """
-    assert file_name is not None
+    assert isinstance(data, tuple)
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
     # x軸、y軸のラベルを非表示に
