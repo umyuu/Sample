@@ -2,7 +2,6 @@
 #概要
 # FEZ Clientのウィンドウ位置を移動するためのツール
 #実行には管理者権限が必要
-#
 #ref
 #◆SetWindowPos
 # https://msdn.microsoft.com/ja-jp/library/cc411206.aspx
