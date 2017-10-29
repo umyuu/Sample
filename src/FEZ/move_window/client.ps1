@@ -1,7 +1,13 @@
+#####################################################################
+#概要
+# FEZ Clientのウィンドウ位置を移動するためのツール
+#実行には管理者権限が必要
+#
 #ref
-# SetWindowPos
+#◆SetWindowPos
 # https://msdn.microsoft.com/ja-jp/library/cc411206.aspx
-
+#
+#####################################################################
 Add-Type @"
   using System;
   using System.Runtime.InteropServices;
@@ -19,15 +25,18 @@ $SWP = @{
     NOSZIE   = 1
     NOZORDER = 4
 }
-"window search =>"
-#$hWnd = (Get-Process "notepad").MainWindowHandle
-$hWnd = (Get-Process "FEzero_Client").MainWindowHandle
-"  WindowHandle:$hWnd"
-$ret = [Win32]::SetWindowPos($hWnd, -1, 20, 0, 0, 0, $SWP.NOSZIE -bor $SWP.NOZORDER)
-if(!$ret) {
-    $LastError = [ComponentModel.Win32Exception][Runtime.InteropServices.Marshal]::GetLastWin32Error()
-    "$LastError"
-    "Error"
-}else {
-    "Success"
+function MoveWindow($title) {
+    $hWnd = (Get-Process $title).MainWindowHandle
+    "  WindowHandle:$hWnd"
+    $ret = [Win32]::SetWindowPos($hWnd, -1, 20, 0, 0, 0, $SWP.NOSZIE -bor $SWP.NOZORDER)
+    if(!$ret) {
+        $LastError = [ComponentModel.Win32Exception][Runtime.InteropServices.Marshal]::GetLastWin32Error()
+        "$LastError"
+        "Error"
+    }else {
+        "Success"
+    }
 }
+"window search =>"
+#MoveWindow "notepad"
+MoveWindow "FEzero_Client"
