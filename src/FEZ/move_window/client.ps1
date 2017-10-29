@@ -1,0 +1,33 @@
+#ref
+# SetWindowPos
+# https://msdn.microsoft.com/ja-jp/library/cc411206.aspx
+
+Add-Type @"
+  using System;
+  using System.Runtime.InteropServices;
+  
+  public class Win32 {
+    [DllImport("user32.dll", SetLastError=true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+  }
+  
+"@
+
+# SetWindowPos uFlags
+$SWP = @{
+    NOSZIE   = 1
+    NOZORDER = 4
+}
+"window search =>"
+#$hWnd = (Get-Process "notepad").MainWindowHandle
+$hWnd = (Get-Process "FEzero_Client").MainWindowHandle
+"  WindowHandle:$hWnd"
+$ret = [Win32]::SetWindowPos($hWnd, -1, 20, 0, 0, 0, $SWP.NOSZIE -bor $SWP.NOZORDER)
+if(!$ret) {
+    $LastError = [ComponentModel.Win32Exception][Runtime.InteropServices.Marshal]::GetLastWin32Error()
+    "$LastError"
+    "Error"
+}else {
+    "Success"
+}
