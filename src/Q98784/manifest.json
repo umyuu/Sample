@@ -1,0 +1,13 @@
+{
+	"author": "うみゅ",
+	"description": "PDF_Download",
+	"permissions": ["storage" , "downloads"],
+	"manifest_version": 2,
+    "background": {
+    	   "scripts": ["js/background.js"],
+    	   "persistent": false
+    },
+	"name": "PDF_Download",
+	"homepage_url": "http://example.com/",
+	"version": "1.0.0"
+}
