@@ -2,13 +2,11 @@
 #概要
 # FEZ Clientのウィンドウ位置を移動するためのツール
 #実行には管理者権限が必要
-#use setting.json
+# read setting.json file.
 #
 #Reference
 #◆SetWindowPos
 # https://msdn.microsoft.com/ja-jp/library/cc411206.aspx
-#◆Make it easier to wrap powershell scripts in batch files
-# https://connect.microsoft.com/PowerShell/feedback/details/724524/make-it-easier-to-wrap-powershell-scripts-in-batch-files
 #####################################################################
 Add-Type @"
   using System;
