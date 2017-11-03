@@ -1,4 +1,5 @@
-﻿#####################################################################
+﻿@powershell -NoProfile -ExecutionPolicy Unrestricted "$s=[scriptblock]::create((gc \"%~f0\"|?{$_.readcount -gt 1})-join\"`n\");&$s "%~dp0 %*&goto:eof
+#####################################################################
 #概要
 # FEZ Clientのウィンドウ位置を移動するためのツール
 #実行には管理者権限が必要
@@ -39,7 +40,7 @@ function MoveWindow($title, $x, $y) {
 }
 Write-Host ""
 # read json file.
-$config = Get-Content (Join-Path $PSScriptRoot "setting.json") | ConvertFrom-Json
+$config = Get-Content (Join-Path $args "setting.json") | ConvertFrom-Json
 Write-Host $config
 Write-Host "window search =>"
 MoveWindow $config.WINDOW.TITLE $config.WINDOW.X $config.WINDOW.Y

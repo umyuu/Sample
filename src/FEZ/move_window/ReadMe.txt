@@ -11,15 +11,13 @@
 ./
 ├ document.png      … Screenshot(shortcut settings)
 ├ setting.json      … setting file.
-├ runner.bat        … call main.ps1 file.
-├ ReadMe.txt        … It is a file that is open now.
-└ main.ps1          … PowerShell Script file.
-------------------------------------------------------------
+├ runner.bat        … PowerShell Script file.
+└ ReadMe.txt        … It is a file that is open now.
 ------------------------------------------------------------
 □Program.
 ------------------------------------------------------------
 main code.
-./main.ps1
+./runner.bat
 ------------------------------------------------------------
 □Uninstall
 Delete the downloaded zip file and the extracted directory.
