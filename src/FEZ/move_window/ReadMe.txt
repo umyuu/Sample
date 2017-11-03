@@ -1,24 +1,20 @@
 ﻿------------------------------------------------------------
-□install
+◆概要
+FEZ(Fantasy Earth ZERO)のウィンドウの位置をずらすプログラム。
+
 ------------------------------------------------------------
-1,downloaded zip to extract.
-2,create runner.bat desktop shortcut.
-  2-1. bat file administrator users.
-  → document.png
+◆インストール手順
+1,ダウンロードしたzipファイルを解凍。
+2,起動ショートカットファイルの作成。
+2-1,runnerを右クリック→ショートカットの作成。
+2-2,管理者権限を付与。
+    ショートカットを右クリック→プロパティ
+　　　→ショートカットタブ→詳細設定→管理者として実行にチェック。
+
+    ◆参考情報
+　　　document.png
+
 ------------------------------------------------------------
-□Directory Deploy
-------------------------------------------------------------
-./
-├ document.png      … Screenshot(shortcut settings)
-├ setting.json      … setting file.
-├ runner.bat        … PowerShell Script file.
-└ ReadMe.txt        … It is a file that is open now.
-------------------------------------------------------------
-□Program.
-------------------------------------------------------------
-main code.
-./runner.bat
-------------------------------------------------------------
-□Uninstall
-Delete the downloaded zip file and the extracted directory.
+◆アンインストール手順
+ダウンロードしたzipファイルをゴミ箱へ。
 ------------------------------------------------------------
