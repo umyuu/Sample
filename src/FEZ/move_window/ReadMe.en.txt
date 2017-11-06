@@ -12,7 +12,7 @@
 ├ document.png      … Screenshot(shortcut settings)
 ├ setting.json      … setting file.
 ├ runner.bat        … PowerShell Script file.
-└ ReadMe.txt        … It is a file that is open now.
+└ ReadMe.en.txt        … It is a file that is open now.
 ------------------------------------------------------------
 □Program.
 ------------------------------------------------------------
