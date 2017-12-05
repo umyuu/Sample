@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <button id="button" value=1>Click!</button>
+    <h1 id="result">0</h1>
+    <script>
+        function add(event) {
+            // クリックしたButtonを取得
+            console.log(event);
+            var btn = event.target;
+            var result = document.querySelector('#result');
+            // 加算
+            var num = parseInt(result.textContent) + parseInt(btn.value);
+            result.textContent = num;
+        };
+
+        var B = document.querySelector('#button');
+        B.addEventListener('click', add);
+    </script>
+</body>
+</html>
