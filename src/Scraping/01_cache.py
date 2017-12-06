@@ -16,15 +16,15 @@ class Downloader(object):
     def hash_value(url):
         h = hashlib.sha512()
         h.update(url.encode('utf-8'))
-        return h.hexdigest()
+        return '$6$$' + h.hexdigest()
 
-    def get(self, url):
+    def get_content(self, url):
         file = self.download_dir.joinpath(Downloader.hash_value(url))
         if file.exists():
             with file.open('rb') as f:
                 return f.read()
         # ミリ秒に単位を変換
-        time.sleep(10000/1000)
+        time.sleep(7000/1000)
         res = requests.get(url, timeout=self.timeout)
         with file.open('wb') as f:
             f.write(res.content)
@@ -33,7 +33,7 @@ class Downloader(object):
 
 def main():
     dl = Downloader()
-    content = dl.get('https://github.com/umyuu/Sample/tree/master/src')
+    content = dl.get_content('https://github.com/umyuu/Sample/tree/master/src')
     print(content)
 
 
