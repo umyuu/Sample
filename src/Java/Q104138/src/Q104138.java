@@ -13,12 +13,11 @@ public class Q104138 {
 		final String search_key = "2017-11-30";
 		final URL url = Q104138.class.getClassLoader().getResource("resources/indices_I101.csv");
 
-		try (BufferedReader br = Files.newBufferedReader(Paths.get(url.toURI()), Charset.forName("Windows-31j"))) {
-			try (Stream<String> lines = br.lines()) {
-				lines.filter(line -> line.startsWith(search_key)).forEach(line -> {
-					System.out.println(line);
-				});
-			}
+		try (BufferedReader br = Files.newBufferedReader(Paths.get(url.toURI()), Charset.forName("Windows-31j"));
+				Stream<String> lines = br.lines()) {
+			lines.filter(line -> line.startsWith(search_key)).forEach(line -> {
+				System.out.println(line);
+			});
 		}
 	}
 }
