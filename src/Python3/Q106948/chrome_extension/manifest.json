@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+	"author": "うみゅ",
+	"description": "Q106948 test extension",
+    "name": "Q106948 test extension",
+	"content_scripts": [{
+		"matches": [ "http://*/*", "https://*/*" ],
+		"js": [
+            "main.js"
+        ],
+		"run_at": "document_start"
+	}],
+	"version": "1.0.0"
+}
