@@ -9,6 +9,9 @@ def main():
     chrome_options = Options()
     # ヘッドレスモードを使用したい時は以下の行のコメントを解除してくださいな。
     #chrome_options.add_argument('headless')
+    
+    #ref https://stackoverflow.com/questions/26388779/disable-chrome-yellow-infobar
+    chrome_options.add_argument('--disable-infobars')
     extension_path = os.path.join(base_dir, 'chrome_extension.crx')
     print(extension_path)
     chrome_options.add_extension(extension_path)
