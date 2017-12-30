@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 public class Recur3 {
 	static void recur3(int n) {
+		// 引数としてその値を許容しない時は、実行時エラー(java.lang.ArrayIndexOutOfBoundsException)を発生させるのではなく、任意の例外をthowまたはドキュメント化する。
 		if (n <= 0) {
 			throw new UnsupportedOperationException(String.valueOf(n));
 		}
