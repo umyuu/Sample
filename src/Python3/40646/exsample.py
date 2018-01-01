@@ -14,10 +14,9 @@ def main():
     """
     soup = bs4.BeautifulSoup(html, "lxml")
     icon_part = soup.find_all("ul", id="front")
-    car_model = []
-    for ul_tag in icon_part:
-        for li in ul_tag.find_all('li'):
-            car_model.append(li.text)
+    car_model = [li_tag.text
+                 for ul_tag in icon_part
+                 for li_tag in ul_tag.find_all('li')]
     print(car_model)
 
 
