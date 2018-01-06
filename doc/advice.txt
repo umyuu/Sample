@@ -1,1 +1,7 @@
-ソースコードは読みやすいようにcodeタグで囲ってくださいな。https://teratail.com/help/question-tips#questionTips3-5-1
+﻿ソースコードは読みやすいようにcodeタグで囲ってくださいな。https://teratail.com/help/question-tips#questionTips3-5-1
+--
+Swingのコンポーネント(JFrame/JPanel)を継承したクラスではpaintメソッドはオーバライドしないでください。
+どうしても独自の描画処理を行いたい時は、paintComponentをオーバーライドして描画処理を記述してください。
+□参考情報
+Swing Painting Guidelines (英語)
+http://www.oracle.com/technetwork/java/painting-140037.html#swing_summary
