@@ -1,2 +1,2 @@
-python -m http.server 8000
+python httpserver.py -p 8000
 PAUSE
