@@ -14,7 +14,7 @@
         var svg = d3.select("#svg");
 　　　　 // dragイベント
         var drag = d3.behavior.drag()
-                    .on("drag", function(d,i) {
+                    .on("drag", function(d) {
                         d.x = d3.event.x;
                         d.y = d3.event.y;
                         d3.select(this).attr("x", d.x).attr("y", d.y);
