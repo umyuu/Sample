@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf8">
+    <style>
+      #canvas {
+        background: #666;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        var svg = d3.select("#svg");
+　　　　 // dragイベント
+        var drag = d3.behavior.drag()
+                    .on("drag", function(d,i) {
+                        d.x = d3.event.x;
+                        d.y = d3.event.y;
+                        d3.select(this).attr("x", d.x).attr("y", d.y);
+                    });
+
+　　　　 // 矩形を表示する
+        var dataSet = [{x:100,y:100,w:100,h:100}, {x:100,y:100,w:100,h:100}, {x:250,y:100,w:100,h:100}];
+        svg.selectAll("rects")
+            .data(dataSet)
+            .enter()
+            .append("g")
+            .append('rect')
+            .attr('x', function(d,i){
+                return d.x;
+            })
+            .attr('y', function(d,i){
+                return d.y;
+            })
+            .attr('width', function(d,i){
+                return d.w;
+            })
+            .attr('height', function(d,i){
+                return d.h;
+            })
+            .call(drag);
+    });
+    </script>
+  </head>
+  <body>
+  <svg id="svg" width="1000" height="1000"></svg>
+  </body>
+</html>
