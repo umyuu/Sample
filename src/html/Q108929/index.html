@@ -15,31 +15,34 @@
 　　　　 // dragイベント
         var drag = d3.behavior.drag()
                     .on("drag", function(d) {
-                        d.x = d3.event.x;
-                        d.y = d3.event.y;
+                        d.x += d3.event.dx;
+                        d.y += d3.event.dy;
                         d3.select(this).attr("x", d.x).attr("y", d.y);
                     });
-
-　　　　 // 矩形を表示する
-        var dataSet = [{x:100,y:100,w:100,h:100}, {x:100,y:100,w:100,h:100}, {x:250,y:100,w:100,h:100}];
-        svg.selectAll("rects")
-            .data(dataSet)
-            .enter()
-            .append("g")
-            .append('rect')
-            .attr('x', function(d,i){
-                return d.x;
-            })
-            .attr('y', function(d,i){
-                return d.y;
-            })
-            .attr('width', function(d,i){
-                return d.w;
-            })
-            .attr('height', function(d,i){
-                return d.h;
-            })
-            .call(drag);
+        function drawRect(dataSet, index){
+            svg.append("g")
+                .append('rect')
+                .data([dataSet[index]])
+                .attr('x', function(d,i){
+                    return d.x;
+                })
+                .attr('y', function(d,i){
+                    return d.y;
+                })
+                .attr('width', function(d,i){
+                    return d.w;
+                })
+                .attr('height', function(d,i){
+                    return d.h;
+                })
+                .call(drag);
+        }
+　　　　 
+        var dataSet = [{x:100,y:100,w:100,h:100},{x:250,y:100,w:100,h:100}];
+        // 矩形を表示する
+        drawRect(dataSet, 0);
+        // もう一つ矩形を表示する
+        drawRect(dataSet, 1);
     });
     </script>
   </head>
