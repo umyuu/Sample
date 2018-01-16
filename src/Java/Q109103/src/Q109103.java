@@ -12,23 +12,25 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class Q109103 {
-	private static final File EXECUTABLE_PATH = getExecutablePath();
+	private static final boolean isDebugMode = true;
+	private static final File EXECUTABLE_PATH = getExecutablePath();// アプリケーションの実行パス
 
-	private static File getExecutablePath() {
+	private static final File getExecutablePath() {
+		File f = null;
 		try {
 			URL location = Q109103.class.getProtectionDomain().getCodeSource().getLocation();
-			return new File(location.toURI().getPath());
-		} catch (Exception ex) {
+			f = new File(location.toURI().getPath());
+		} catch (java.net.URISyntaxException ex) {
 			ex.printStackTrace();
-			return null;
 		}
+		return f;
 	}
 
 	public static void main(String[] args) throws Exception {
 		try {
-			System.out.println(EXECUTABLE_PATH);
-			// csvデータを読み取り
-			Map<String, Long> grouped = readAndgrouped();
+			logWrite(EXECUTABLE_PATH);
+			// csvデータを読み取り集約化
+			Map<String, Long> grouped = readCsvAndgrouped();
 			// 集約結果を表示
 			grouped.forEach((k, v) -> System.out.println(k + ":" + String.valueOf(v)));
 			// ファイルに出力
@@ -38,21 +40,21 @@ public class Q109103 {
 		}
 	}
 
-	public static Map<String, Long> readAndgrouped() throws IOException {
+	public static Map<String, Long> readCsvAndgrouped() throws IOException {
 		Path path = Paths.get(EXECUTABLE_PATH.toString(), "data.csv");
-		System.out.println(path);
+		logWrite(path);
 		try (BufferedReader br = Files.newBufferedReader(path)) {
 			Map<String, Long> grouped = br.lines().skip(1).map((String line) -> {
 				String[] arr = line.split(",");
-				return new CsvData(arr[0], arr[1], Long.parseLong(arr[2]));
-			}).collect(Collectors.groupingBy(x -> x.category, Collectors.summingLong(x -> x.price)));
+				return new CsvRow(arr[0], arr[1], Long.parseLong(arr[2]));
+			}).collect(Collectors.groupingBy(x -> x.getCategory(), Collectors.summingLong(x -> x.getPrice())));
 			return grouped;
 		}
 	}
 
 	public static void write(Map<String, Long> grouped) throws IOException {
 		Path path = Paths.get(EXECUTABLE_PATH.toString(), "grouped.csv");
-		System.out.println(path);
+		logWrite(path);
 		Charset encoding = Charset.forName("Windows-31j");
 		try (BufferedWriter bw = Files.newBufferedWriter(path, encoding)) {
 			// ヘッダー行
@@ -67,17 +69,32 @@ public class Q109103 {
 			}
 		}
 	}
-}
-// csvの1行単位
-class CsvData {
-	final String category;
-	final String subitem;
-	final Long price;
 
-	public CsvData(String category, String subitem, Long price) {
+	public static void logWrite(Object message) {
+		if (!isDebugMode) {
+			return;
+		}
+		System.out.println(message);
+	}
+}
+
+// csvの1行単位
+class CsvRow {
+	private final String category;
+	private final String subitem;
+	private final Long price;
+	public CsvRow(String category, String subitem, Long price) {
 		this.category = category;
 		this.subitem = subitem;
 		this.price = price;
+	}
+	// @Getter
+	public String getCategory() {
+		return category;
+	}
+	// @Getter
+	public Long getPrice() {
+		return price;
 	}
 
 	@Override
