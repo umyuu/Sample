@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import requests
-import hashlib
-from pathlib import Path
 import time
+import hashlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+import requests
 
 
 class Downloader(object):
@@ -23,8 +24,8 @@ class Downloader(object):
         if file.exists():
             with file.open('rb') as f:
                 return f.read()
-        # ミリ秒に単位を変換
-        time.sleep(7000/1000)
+        # sleep
+        time.sleep(5)
         res = requests.get(url, timeout=self.timeout)
         with file.open('wb') as f:
             f.write(res.content)
@@ -33,8 +34,20 @@ class Downloader(object):
 
 def main():
     dl = Downloader()
-    content = dl.get_content('https://github.com/umyuu/Sample/tree/master/src')
-    print(content)
+    urls = ['http://www.example.com/',
+            'https://teratail.com/',
+            'https://teratail.com/questions/109282',
+            'https://www.google.co.jp/']
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        future_to_url = {executor.submit(dl.get_content, url): url for url in urls}
+        for future in as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                data = future.result()
+                print(data)
+            except Exception as ex:
+                print('url:{0} exception:{1}'.format(url, ex))
 
 
 if __name__ == '__main__':
