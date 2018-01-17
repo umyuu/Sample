@@ -48,21 +48,21 @@ public class Q109389 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JPanel mainPanel = new JPanel();
+		contentPane.add(mainPanel);
+		mainPanel.setLayout(null);
 		
 		JButton newButton = new JButton("最初から");
 		newButton.setBounds(162, 248, 101, 25);
-		panel.add(newButton);
+		mainPanel.add(newButton);
 		
 		JButton continueButton = new JButton("続きから");
 		continueButton.setBounds(162, 319, 101, 25);
-		panel.add(continueButton);
+		mainPanel.add(continueButton);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 517, 471);
-		lblNewLabel.setIcon(new ImageIcon(Paths.get(EXECUTABLE_PATH.toString(), "bg.png").toString()));
-		panel.add(lblNewLabel);
+		JLabel labelBackGround = new JLabel("");
+		labelBackGround.setBounds(0, 0, 517, 471);
+		labelBackGround.setIcon(new ImageIcon(Paths.get(EXECUTABLE_PATH.toString(), "bg.png").toString()));
+		mainPanel.add(labelBackGround);
 	}
 }
