@@ -1,0 +1,31 @@
+﻿## Pythonを学習し始めた時に知っていたら良かった情報一覧 ##
+1,Pythonはインデント(字下げ)が重要な言語です。
+インデントを意識してコーディングしましょう。
+2,公式ドキュメントをまず見ましょう
+■Python チュートリアル
+https://docs.python.jp/3/tutorial/index.html
+■Python 標準ライブラリ
+https://docs.python.jp/3/library/index.html
+3,業界標準があります。
+数値計算ライブラリ…numpy
+import numpy as np
+データ解析ライブラリ…Pandas
+import pandas as pd
+Webフレームワーク…django
+
+#####  2,コーディング                       #######
+2-1,宣言
+l = [] # list型
+d = {} # dict型
+
+
+2-2,クラスのメンバ関数の引数には引数selfが必要です。
+class Sample(object):
+    def __init__(self):
+        pass
+
+--
+#####  3,デバック
+3-1,Python Tutorは短いスクリプトの動作の可視化に便利です。
+■Python Tutor - Visualize Python
+http://www.pythontutor.com/
