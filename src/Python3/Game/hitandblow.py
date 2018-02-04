@@ -3,20 +3,21 @@ import random
 
 
 class HitAndBlow(object):
-    def __init__(self, n=3):
+    def __init__(self, n: int=3):
+        assert 10 >= n
         self.N = n
         self.answer = self.generate()
 
-    def generate(self):
+    def generate(self) -> list:
         """
         答えの数字を生成。
         :return:
         """
-        digits = [i for i in range(10)]
+        digits = list(range(10))
         random.shuffle(digits)
         return digits[:self.N]
 
-    def judge(self, guess):
+    def judge(self, guess: list) -> tuple:
         """
         Hit&Blowの判定処理
         :param guess: 予測した数字
@@ -36,7 +37,7 @@ def main():
         if len(guess) != game.N:
             continue
 
-        #print(game.answer)
+        print(game.answer)
         hit, blow = game.judge(guess)
         print(f"Hit:{hit}, Blow:{blow}")
         if hit == game.N:
