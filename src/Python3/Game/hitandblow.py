@@ -17,7 +17,7 @@ class HitAndBlow(object):
         random.shuffle(digits)
         return digits[:self.N]
 
-    def judge(self, guess: list) -> tuple:
+    def predict(self, guess: list) -> tuple:
         """
         Hit&Blowの判定処理
         :param guess: 予測した数字
@@ -32,16 +32,17 @@ class HitAndBlow(object):
 def main():
     game = HitAndBlow()
     while True:
-        input_num = input(f"予想する{game.N}桁の数字を入力してください:")
-        guess = [int(x) for x in list(input_num)]
-        if len(guess) != game.N:
+        user_input = input(f"予想する{game.N}桁の数字を入力してください:")
+        if len(user_input) != game.N:
             continue
+        guess = [int(i) for i in user_input]
 
-        print(game.answer)
-        hit, blow = game.judge(guess)
+        #print(game.answer)
+        hit, blow = game.predict(guess)
         print(f"Hit:{hit}, Blow:{blow}")
+        # ゲームクリア
         if hit == game.N:
-            print('正解です')
+            print('正解です！')
             break
 
 
