@@ -57,11 +57,12 @@ class Player(Flyer):
 
             @property
             def is_destroy(self) -> bool:
-                if self.bullet.x < 0 or self.bullet.y < 0:
+                if self.bullet.x < -30 or self.bullet.y < - 30:
                     return True
                 return False
 
         # 自機の位置が移動しても発射位置が追従するようにself.x/self.y ではなく self.rectを使用
+        # 3,Bulletクラスのインスタンス変数を生成してshoot関数の戻り値として返す
         return Bullet(self.rect.x, self.rect.y)
 
 
@@ -78,6 +79,7 @@ def main():
     player = Player("player.jpg", 350, 400, 5, 5)
     enemy1 = Enemy("enemy.jpg", 100, 100, 5, 0)
     clock = pygame.time.Clock()
+    # 1,リストでbulletの生存管理
     bullet_list = []
 
     while 1:
@@ -88,6 +90,7 @@ def main():
         enemy1.move()
         player.draw(screen)
         enemy1.draw(screen)
+        # 5,bullet_listの内容をfor in ループで回す。
         for bullet in bullet_list:
             bullet.move()
             bullet.draw()
@@ -101,9 +104,12 @@ def main():
                 pygame.quit()
                 sys.exit()
             if event.type == KEYDOWN:
+                # 2,ショット：スペースキーを押下時に弾を発射
                 if event.key == K_SPACE:
                     # 発射時にbullet_listに追加
-                    bullet_list.append(player.shoot(screen))
+                    bullet = player.shoot(screen)
+                    # 4,リストにplayer.shootの戻り値である変数:bulletを追加
+                    bullet_list.append(bullet)
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
