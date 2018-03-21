@@ -1,0 +1,16 @@
+{
+	"author": "うみゅ",
+	"description": "A118348",
+	"permissions": ["storage"],
+	"manifest_version": 2,
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
+    "browser_action": {
+        "default_popup": "browser.html"
+    },
+	"name": "A118348",
+	"homepage_url": "http://example.com/",
+	"version": "1.0.0"
+}
