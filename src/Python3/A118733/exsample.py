@@ -11,9 +11,10 @@ def main() -> None:
 
     file_name = querystring['Id'] + '_' + querystring['Id2'] + '.json'
     with open(file_name, 'a') as f:  # 追記モードで開く
-        f.write('\n' + '#' * 60 + '\n')
-        f.write(str(response.status_code) + '\n') # ステータスコードを書き込み
-        f.write(datetime.now().strftime('%Y%m%d_%H%M%S_%f') + '\n')
+        file_header = ['', '#' * 60,
+                       str(response.status_code),
+                       datetime.now().strftime('%Y%m%d_%H%M%S_%f'), '']
+        f.write(str.join('\n', file_header))
         f.writelines(response.text)  # シーケンスが引数。
 
 
