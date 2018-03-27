@@ -12,6 +12,8 @@ import numpy as np
 データ解析ライブラリ…Pandas
 import pandas as pd
 Webフレームワーク…django
+3,pipユーザーでインストールする方法
+pip install library_name --user
 
 #####  2,コーディング                       #######
 2-1,宣言
