@@ -14,9 +14,7 @@ def connect():
         json_data = json.load(f)
     con_str = json_data['connection_strings']
     print(con_str)
-    return mysql.connector.connect(host=con_str['host'], db=con_str['db'],
-                            user=con_str['user'], passwd=con_str['passwd'],
-                            charset=con_str['charset'])
+    return mysql.connector.connect(**con_str)
 
 
 def read_csv(file_name: str='data.csv', encoding='utf-8-sig'):
