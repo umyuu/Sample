@@ -1,23 +1,27 @@
 # -*- coding: utf8 -*-
 from contextlib import closing
 import json
-# pip install mysql-connector-python-rf
-import mysql.connector
+# pip install PyMySQL
+import pymysql
+from pymysql.constants.CLIENT import MULTI_STATEMENTS
 
 
 def connect():
-    with open('settings.json', encoding='utf-8-sig') as f:
-        json_data = json.load(f)
-    con_str = json_data['connection_strings']
-    print(con_str)
-    return mysql.connector.connect(**con_str)
+    return pymysql.connect(host='localhost',
+                           user='root',
+                           password='',
+                           db='testdb',
+                           client_flag=MULTI_STATEMENTS)
 
 
 def main() -> None:
     with closing(connect()) as conn:
         with closing(conn.cursor()) as cur:
-            for _ in cur.execute("create table sampleA (id int, rnd int);create table sampleB (id int, rnd int);", multi=True):
-                pass
+            cur.execute("select 1;create table sampleAAB (id int, rnd int);create table sampleBAA (id int, rnd int);")
+            while True:
+                print(cur.fetchall())
+                if not cur.nextset():
+                    break
             conn.commit()
 
 
