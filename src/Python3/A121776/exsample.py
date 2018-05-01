@@ -1,14 +1,14 @@
 # -*- coding: utf8 -*-
-import os
+from os import getcwd
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from socketserver import ThreadingMixIn
 from ipaddress import ip_address
-import html
+from html import escape
 
 
 class MyHandler(SimpleHTTPRequestHandler):
     def to_content(self) -> str:
-        body = f"time:{html.escape(self.date_time_string())}<br>dir:{html.escape(os.getcwd())}"
+        body = f"time:{escape(self.date_time_string())}<br>dir:{escape(getcwd())}"
         content = f"<html><head></head><body>{body}</body></html>"
         return content
 
@@ -35,8 +35,6 @@ class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 
 def main() ->None:
     PORT = 8000
-    print(os.getcwd())
-    print(os.path.abspath(__file__))
     with ThreadingHTTPServer(("", PORT), MyHandler) as httpd:
         print("serving at port", PORT)
         httpd.serve_forever()
