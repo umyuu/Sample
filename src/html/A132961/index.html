@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf8">
+    <script>
+    class Genom{
+    constructor(genomList,evaluation){
+        this.genomList = genomList;
+        this.evaluation = evaluation;
+    }
+
+    get getGenom(){
+        return this.genomList;
+    }
+    get getEvaluation(){
+        return this.evaluation;
+    }
+    set setGenom(genomList){
+        this.genomList = genomList;
+    }
+    set setEvaluation(evaluation){
+        this.evaluation = evaluation;
+    }
+}
+let aa = new Genom([],1);
+   aa.setEvaluation = 2;
+   console.log(aa);
+let group = [aa]
+group.forEach((element) => {
+  element.setEvaluation = 3;
+});
+
+    </script>
+  </head>
+  <body>
+  <div class='link'></div>
+  </body>
+</html>
