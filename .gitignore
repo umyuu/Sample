@@ -9,3 +9,4 @@ src/Q96570/graph.png
 /src/Java/JavaFXApplication2/dist/
 /src/Java/JavaFXApplication2/build/
 geckodriver.log
+*.class
